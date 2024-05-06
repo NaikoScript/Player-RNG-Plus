@@ -1,7 +1,20 @@
 # Player RNG Plus
-This script has not been released yet so don't try it   
-If you wanna have the files ready ig you can do that but i suggest you wait till i have both scripts secured to work with file replacement
-___
+> [!WARNING]
+> **If you use this script early its possible that it could mess up the files of older scripts so wait for its full release so other scripts also have the new file format so they don't bug out.**
+## Script progress
+- [x] Working Functions
+- [x] Working Data
+- [x] Working Animated UI
+- [ ] Working Autofarm
+- [ ] Fully tested working pathfinding
+- [ ] Fully working UI
+- [ ] AutoRoll Function
+## Script thumbnail
 ![PlayerRng+](https://github.com/NaikoScript/Player-RNG-Plus/assets/107273752/9a29f334-47b7-4e11-bdf3-da7209eb2fd5)
-___
-[https://www.roblox.com/games/16953799253]
+## Script information
+`Version 0.96`
+## Game information
+`Last seen update : 7D/5M/2024`
+```
+https://www.roblox.com/games/16953799253
+```

@@ -35,7 +35,7 @@ local Type = 0
 local LuckPlace = game:GetService("Workspace").Luck
 local LuckCount = game:GetService("Workspace").Luck.BillboardGui.Count
 local Tween = game:GetService("TweenService")
-local Version = 0.95
+local Version = 0.96
 
 -- Data --
 
@@ -143,6 +143,7 @@ Layout.Padding = UDim.new(0,10)
 Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 Padding2.Parent = Frame
 Padding2.PaddingTop = UDim.new(0,10)
+Main.UIScale.Scale = 1
 Main.Preview2.Top.Buttons.Position = UDim2.new(0,0,0.5,0)
 Main.Preview2.Top.Buttons.Size = UDim2.new(0,0,0,0) -- idk
 Main.Preview2.Top.Buttons.ImageButton.Size = UDim2.new(0,40,0,40)

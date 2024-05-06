@@ -1,4 +1,5 @@
 # Player RNG Plus
+![Discord Shield](https://discordapp.com/api/guilds/894235145727516672/widget.png?style=shield)
 > [!WARNING]
 > **If you use this script early its possible that it could mess up the files of older scripts so wait for its full release so other scripts also have the new file format so they don't bug out.**
 ## Script progress

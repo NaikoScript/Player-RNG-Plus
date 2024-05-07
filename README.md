@@ -1,4 +1,7 @@
 # Player RNG Plus
+> [!IMPORTANT]
+> **Join the [discord server](https://discord.gg/vAWJMYJYcR) to get updates with the scripts progress and be informed when its fully released.**
+
 > [!WARNING]
 > **If you use this script early its possible that it could mess up the files of older scripts so wait for its full release so other scripts also have the new file format so they don't bug out.**
 ## Script progress

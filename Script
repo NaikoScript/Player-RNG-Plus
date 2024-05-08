@@ -32,17 +32,17 @@ local Humanoid = Char:WaitForChild("Humanoid",15)
 local PlayerUI = LocalPlayer.PlayerGui.ScreenGui
 local Buttons = PlayerUI.Buttons
 local Type = 0
+local CurrentlyAutofarming = false
 local LuckPlace = game:GetService("Workspace").Luck
 local LuckCount = game:GetService("Workspace").Luck.BillboardGui.Count
 local Tween = game:GetService("TweenService")
-local Version = 0.96
+local Version = 0.98
 
 -- Data --
 
 function DefaultData(Path,Option)
 local suc,err = pcall(function()
 	if readfile("NaikoScript/PlayerRngPlus/" .. Path) then
-		print("yippe it worked")
 	end
 end)
 if suc == true then
@@ -85,6 +85,7 @@ makefolder("NaikoScript/PlayerRngPlus")
 DefaultData("LuckyArea.txt","Path")
 DefaultData("AutoExecute.txt","true")
 DefaultData("AutoServerHop.txt","true")
+DefaultData("Started.txt","false")
 DefaultData("ServerIdTarget.JobId","None")
 Type = 1
 elseif isfolder("NaikoScript") and not isfolder("NaikoScript/PlayerRngPlus") then
@@ -96,157 +97,6 @@ Type = 3
 print("This script has been executed before")
 end
 
--- UI Creation --
-
-local Main = PlayerUI:FindFirstChild("Find"):Clone()
-local Title = Instance.new("TextLabel")
-local Padding = Instance.new("UIPadding")
-local Frame = Instance.new("Frame")
-local Layout = Instance.new("UIListLayout")
-local Padding2 = Instance.new("UIPadding")
-local CloseButton = Main.Preview2.Top.Close
-local Open = false
-
-function CreateButton()
-local Button = Instance.new("TextButton")
-local Corner = Instance.new("UICorner")
-local Stroke = Instance.new("UIStroke")
-Button.Parent = Frame
-Button.BackgroundColor3 = Color3.new(0,0,0)
-Button.TextColor3 = Color3.new(1,1,1)
-Button.TextScaled = true
-Button.Size = UDim2.new(0.75,0,0.1,0)
-Button.Name = "Button"
-Corner.CornerRadius = UDim.new(0,18)
-Corner.Parent = Button
-Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Stroke.Color = Color3.fromRGB(60,60,60)
-Stroke.Thickness = 1.5
-Stroke.Parent = Button
-return Button
-end
-
-Main.Name = "Plus"
-Title.Name = "Title"
-Title.Parent = Main.Preview2.Top.Buttons
-Title.Text = "Player RNG plus"
-Title.Size = UDim2.new(0.65,0,0.9,0)
-Title.TextScaled = true
-Title.BackgroundTransparency = 1
-Title.LayoutOrder = 2
-Title.TextColor3 = Color3.new(1,1,1)
-Frame.Parent = Main.Preview2
-Frame.Size = UDim2.new(1,0,0.825,0)
-Frame.BackgroundTransparency = 1
-Layout.Parent = Frame
-Layout.Padding = UDim.new(0,10)
-Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-Padding2.Parent = Frame
-Padding2.PaddingTop = UDim.new(0,10)
-Main.UIScale.Scale = 1
-Main.Preview2.Top.Buttons.Position = UDim2.new(0,0,0.5,0)
-Main.Preview2.Top.Buttons.Size = UDim2.new(0,0,0,0) -- idk
-Main.Preview2.Top.Buttons.ImageButton.Size = UDim2.new(0,40,0,40)
-Main.Preview2.Top.Buttons.ImageButton.Image = "rbxassetid://12072054746"
-Main.Preview2.Top.Buttons.ImageButton.Visible = true
-Padding.Parent = Main.Preview2.Top.Buttons
-Padding.PaddingLeft = UDim.new(0,0)
-Main.Preview2.Top.Buttons.UIListLayout.Padding = UDim.new(0,10)
-Main.Preview2.Top.Buttons.UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
-Main.Preview2.Top.Buttons.UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
-Main.Parent = PlayerUI
-Main.Visible = false
-Main.Preview:Destroy()
-Main.Size = UDim2.new(0,350,0,350)
-Main.Preview2.Size = UDim2.new(1,0,1,0)
-Main.Preview2.Find:Destroy()
-Main.Preview2.Info:Destroy()
-Main.Preview2.RarityReasons:Destroy()
-Main.Preview2.UIStroke:Destroy()
-
-local UIVersion = Instance.new("TextLabel")
-UIVersion.Parent = PlayerUI
-UIVersion.Visible = true
-UIVersion.Size = UDim2.new(0.05,0,0.05,0)
-UIVersion.Position = UDim2.new(0,0,1,0)
-UIVersion.BackgroundTransparency = 1
-UIVersion.AnchorPoint = Vector2.new(0,1)
-UIVersion.TextScaled = true
-UIVersion.TextColor3 = Color3.new(1,1,1)
-UIVersion.Name = "Version"
-UIVersion.Text = "V" .. tostring(Version)
-
-local Button = Buttons:FindFirstChild("Find"):Clone()
-local Icon = Button.Icon
-Button.Parent = Buttons
-Button.Name = "Plus"
-Icon.Image = "rbxassetid://12072054746"
-
--- Button Events --
-
-for i,v in pairs(Buttons:GetChildren()) do
-if v ~= Button and v:IsA("TextButton") then
-v.MouseButton1Click:Connect(function()
-Main.Visible = false
-Open = false
-end)
-end
-end
-
-Button.MouseEnter:Connect(function()
-local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out)
-Tween:Create(Button.UIScale,InfoTween,{Scale = 1.2}):Play()
-Icon.ImageColor3 = Color3.fromRGB(0,0,0)
-Button.BackgroundColor3 = Color3.fromRGB(3, 252, 152)
-end)
-
-Button.MouseLeave:Connect(function()
-local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out)
-Tween:Create(Button.UIScale,InfoTween,{Scale = 1}):Play()
-Icon.ImageColor3 = Color3.fromRGB(255,255,255)
-Button.BackgroundColor3 = Color3.fromRGB(0,0,0)
-end)
-
-Button.MouseButton1Click:Connect(function()
-Sounds.Click:Play()
-PlayerUI.Find.Visible = false
-PlayerUI.Inventory.Visible = false
-if Open == true then
-Open = false
-local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-Tween:Create(Camera,InfoTween,{FieldOfView = 70}):Play()
-Main.Visible = false
-elseif Open == false then
-Open = true
-Main.Visible = true
-local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-local InfoTween2 = TweenInfo.new(0.35,Enum.EasingStyle.Back,Enum.EasingDirection.Out)
-Main.Position = UDim2.new(0.5,0,0.6,0)
-Main.GroupTransparency = 0.5
-Tween:Create(Main,InfoTween2,{Position = UDim2.new(0.5,0,0.5,0),GroupTransparency = 0}):Play()
-Tween:Create(Camera,InfoTween,{FieldOfView = 50}):Play()
-end
-end)
-
--- Main UI Events --
-
-CloseButton.MouseEnter:Connect(function()
-local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Linear,Enum.EasingDirection.Out)
-Tween:Create(CloseButton,InfoTween,{ImageTransparency = 0.5}):Play()
-end)
-
-CloseButton.MouseLeave:Connect(function()
-local InfoTween = TweenInfo.new(0.2,Enum.EasingStyle.Linear,Enum.EasingDirection.Out)
-Tween:Create(CloseButton,InfoTween,{ImageTransparency = 0}):Play()
-end)
-
-CloseButton.MouseButton1Click:Connect(function()
-Open = false
-local InfoTween = TweenInfo.new(0.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
-Tween:Create(Camera,InfoTween,{FieldOfView = 70}):Play()
-Main.Visible = false
-end)
-
 -- Script functions --
 
 function CheckLuckCount(Count)
@@ -254,6 +104,24 @@ local Amount = Count:split("/")
 local Minimum = Amount[1]
 local Maximum = Amount[2]
 return Minimum,Maximum
+end
+
+function SetHitbox() 
+if LuckPlace ~= nil then
+LuckPlace.Size = Vector3.new(275,275,275)
+LuckPlace.Position = Vector3.new(0, -22, 0)
+else
+	error("Failed to get the luck part")
+end
+end
+
+function TeleportLuck() 
+if LocalPlayer.Character ~= nil and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LuckPlace ~= nil then
+local Root = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+Root.CFrame = CFrame.new(187.5, 60, -185)
+else
+	error("Failed to get the character or the luck part")
+end
 end
 
 function GoToLuck()
@@ -279,8 +147,8 @@ local function pathFindTo(destination)
 
 		end
 		end
+	pathFindTo(Vector3.new(0, -22, 0))
 	pathFindTo(Vector3.new(105, 6.25, -181))
-	task.wait()
 	Humanoid:MoveTo(Vector3.new(120, 35, -181))
 	Humanoid.MoveToFinished:Wait()
 	pathFindTo(Vector3.new(173, 52.5, -188.5))
@@ -337,16 +205,221 @@ end
         if (not Server or #Servers == 0) then
             return 
         end
+		ChangeData("Started.txt","true")
 		ChangeData("ServerIdTarget.JobId",tostring(Server.id),true)
 		task.wait()
         game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, Server.id);    
         
     end
     end
+
+-- UI Creation --
+
+local Main = PlayerUI:FindFirstChild("Find"):Clone()
+local Title = Instance.new("TextLabel")
+local Padding = Instance.new("UIPadding")
+local Frame = Instance.new("Frame")
+local Layout = Instance.new("UIListLayout")
+local Padding2 = Instance.new("UIPadding")
+local CloseButton = Main.Preview2.Top.Close
+local Open = false
+
+function CreateButton()
+local Button = Instance.new("TextButton")
+local Corner = Instance.new("UICorner")
+local Stroke = Instance.new("UIStroke")
+Button.BackgroundColor3 = Color3.new(0,0,0)
+Button.TextColor3 = Color3.new(1,1,1)
+Button.TextScaled = true
+Button.Size = UDim2.new(0.75,0,0.15,0)
+Button.Name = "Button"
+Corner.CornerRadius = UDim.new(0,18)
+Corner.Parent = Button
+Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Stroke.Color = Color3.fromRGB(60,60,60)
+Stroke.Thickness = 1.5
+Stroke.Parent = Button
+return Button
+end
+
+Main.Name = "Plus"
+Title.Name = "Title"
+Title.Parent = Main.Preview2.Top.Buttons
+Title.Text = "Player RNG plus"
+Title.Size = UDim2.new(0.65,0,0.9,0)
+Title.TextScaled = true
+Title.BackgroundTransparency = 1
+Title.LayoutOrder = 2
+Title.TextColor3 = Color3.new(1,1,1)
+Frame.Parent = Main.Preview2
+Frame.Size = UDim2.new(1,0,0.65,0)
+Frame.BackgroundTransparency = 1
+Layout.Parent = Frame
+Layout.Padding = UDim.new(0,10)
+Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+Padding2.Parent = Frame
+Padding2.PaddingTop = UDim.new(0,10)
+Main.UIScale.Scale = 1
+Main.Preview2.Top.Buttons.Position = UDim2.new(0,0,0.5,0)
+Main.Preview2.Top.Buttons.Size = UDim2.new(0,0,0,0) -- idk
+Main.Preview2.Top.Buttons.ImageButton.Size = UDim2.new(0,40,0,40)
+Main.Preview2.Top.Buttons.ImageButton.Image = "rbxassetid://12072054746"
+Main.Preview2.Top.Buttons.ImageButton.Visible = true
+Padding.Parent = Main.Preview2.Top.Buttons
+Padding.PaddingLeft = UDim.new(0,0)
+Main.Preview2.Top.Buttons.UIListLayout.Padding = UDim.new(0,10)
+Main.Preview2.Top.Buttons.UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+Main.Preview2.Top.Buttons.UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+Main.Parent = PlayerUI
+Main.Visible = false
+Main.Preview:Destroy()
+Main.Size = UDim2.new(0,350,0,350)
+Main.Preview2.Size = UDim2.new(1,0,1,0)
+Main.Preview2.Find:Destroy()
+Main.Preview2.Info:Destroy()
+Main.Preview2.RarityReasons:Destroy()
+Main.Preview2.UIStroke:Destroy()
+local StartFrame = Frame:Clone()
+StartFrame.Parent = Main.Preview2
+StartFrame.Name = "Start"
+local StartButton = CreateButton()
+local PaddingStart = Instance.new("UIPadding")
+StartButton.Parent = StartFrame
+StartButton:FindFirstChildOfClass("UIStroke"):Destroy()
+StartButton.Size = UDim2.new(0.35,0,0.125,0)
+StartButton.BackgroundColor3 = Color3.new(17, 186, 124)
+StartButton.UICorner.CornerRadius = UDim.new(0,15)
+PaddingStart.Parent = StartButton
+PaddingStart.PaddingLeft = Vector2.new(0,2)
+PaddingStart.PaddingTop = Vector2.new(0,2)
+PaddingStart.PaddingRight = Vector2.new(0,2)
+PaddingStart.PaddingBottom = Vector2.new(0,2)
+
+local UIVersion = Instance.new("TextLabel")
+UIVersion.Parent = PlayerUI
+UIVersion.Visible = true
+UIVersion.Size = UDim2.new(0.05,0,0.05,0)
+UIVersion.Position = UDim2.new(0,0,1,0)
+UIVersion.BackgroundTransparency = 1
+UIVersion.AnchorPoint = Vector2.new(0,1)
+UIVersion.TextScaled = true
+UIVersion.TextColor3 = Color3.new(1,1,1)
+UIVersion.Name = "Version"
+UIVersion.Text = "V" .. tostring(Version)
+
+local Button = Buttons:FindFirstChild("Find"):Clone()
+local Icon = Button.Icon
+Button.Parent = Buttons
+Button.Name = "Plus"
+Icon.Image = "rbxassetid://12072054746"
+
+-- Button Events --
+
+for i,v in pairs(Buttons:GetChildren()) do
+if v ~= Button and v:IsA("TextButton") then
+v.MouseButton1Click:Connect(function()
+Main.Visible = false
+Open = false
+end)
+end
+end
+
+StartButton.MouseButton1Click:Connect(function()
+Open = false
+local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+Tween:Create(Camera,InfoTween,{FieldOfView = 70}):Play()
+Main.Visible = false
+CurrentlyAutofarming = true
+	if ReturnData("LuckyArea.txt",true) == "Path" then
+	GoToLuck()
+	elseif ReturnData("LuckyArea.txt",true) == "Teleport" then
+	TeleportLuck()
+	elseif ReturnData("LuckyArea.txt",true) == "Hitbox" then
+	SetHitbox()
+	else 
+	CurrentlyAutofarming = false
+	ChangeData("LuckyArea.txt","Path",true)
+	ChangeData("Started.txt","false")
+	ChangeData("ServerIdTarget.JobId","None",true)
+end
+task.spawn(function()
+while task.wait(2.5) do
+	if tonumber(CheckLuckCount(LuckCount.Text)[2]) - tonumber(CheckLuckCount(LuckCount.Text)[1]) == 1 then
+
+		else
+			ServerHop()
+	end
+end
+	end)
+end
+end)
+
+Button.MouseEnter:Connect(function()
+local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out)
+Tween:Create(Button.UIScale,InfoTween,{Scale = 1.2}):Play()
+Icon.ImageColor3 = Color3.fromRGB(0,0,0)
+Button.BackgroundColor3 = Color3.fromRGB(3, 252, 152)
+end)
+
+Button.MouseLeave:Connect(function()
+local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out)
+Tween:Create(Button.UIScale,InfoTween,{Scale = 1}):Play()
+Icon.ImageColor3 = Color3.fromRGB(255,255,255)
+Button.BackgroundColor3 = Color3.fromRGB(0,0,0)
+end)
+
+Button.MouseButton1Click:Connect(function()
+Sounds.Click:Play()
+PlayerUI.Find.Visible = false
+PlayerUI.Inventory.Visible = false
+if Open == true then
+Open = false
+local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+Tween:Create(Camera,InfoTween,{FieldOfView = 70}):Play()
+Main.Visible = false
+elseif Open == false then
+Open = true
+Main.Visible = true
+local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+local InfoTween2 = TweenInfo.new(0.35,Enum.EasingStyle.Back,Enum.EasingDirection.Out)
+Main.Position = UDim2.new(0.5,0,0.6,0)
+Main.GroupTransparency = 0.5
+Tween:Create(Main,InfoTween2,{Position = UDim2.new(0.5,0,0.5,0),GroupTransparency = 0}):Play()
+Tween:Create(Camera,InfoTween,{FieldOfView = 50}):Play()
+end
+end)
+
+-- Main UI Events --
+
+CloseButton.MouseEnter:Connect(function()
+local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Linear,Enum.EasingDirection.Out)
+Tween:Create(CloseButton,InfoTween,{ImageTransparency = 0.5}):Play()
+end)
+
+CloseButton.MouseLeave:Connect(function()
+local InfoTween = TweenInfo.new(0.2,Enum.EasingStyle.Linear,Enum.EasingDirection.Out)
+Tween:Create(CloseButton,InfoTween,{ImageTransparency = 0}):Play()
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+Open = false
+local InfoTween = TweenInfo.new(0.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
+Tween:Create(Camera,InfoTween,{FieldOfView = 70}):Play()
+Main.Visible = false
+end)
+
+
     
 -- General scripting --
 
+if ReturnData("ServerIdTarget.JobId",true) == tostring(game.JobId) then
+CurrentlyAutofarming = true
+else
+ChangeData("ServerIdTarget.JobId","None",true)
+end
+
 local Button1 = CreateButton()
+Button1.Parent = Frame
 Button1.Text = "Pathfinding"
 
 Button1.MouseButton1Click:Connect(function()
@@ -369,6 +442,7 @@ end
 end)
 
 local Button2 = CreateButton()
+Button2.Parent = Frame
 Button2.Text = "AutoExecute (On)"
 
 Button2.MouseButton1Click:Connect(function()
@@ -388,8 +462,8 @@ end
 end)
 
 local Button3 = CreateButton()
+Button3.Parent = Frame
 Button3.Text = "AutoServerHop (On)"
-
 
 Button3.MouseButton1Click:Connect(function()
 if Button3.Text == "AutoServerHop (On)" then
@@ -406,3 +480,27 @@ ChangeData("AutoServerHop.txt","true",true)
 
 end
 end)
+
+if CurrentlyAutofarming == true then
+if ReturnData("LuckyArea.txt",true) == "Path" then
+	GoToLuck()
+	elseif ReturnData("LuckyArea.txt",true) == "Teleport" then
+	TeleportLuck()
+	elseif ReturnData("LuckyArea.txt",true) == "Hitbox" then
+	SetHitbox()
+	else 
+	CurrentlyAutofarming = false
+	ChangeData("LuckyArea.txt","Path",true)
+	ChangeData("Started.txt","false")
+	ChangeData("ServerIdTarget.JobId","None",true)
+end
+task.spawn(function()
+while task.wait(2.5) do
+	if tonumber(CheckLuckCount(LuckCount.Text)[2]) - tonumber(CheckLuckCount(LuckCount.Text)[1]) == 1 then
+
+		else
+			ServerHop()
+	end
+end
+	end)
+end

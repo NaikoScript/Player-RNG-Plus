@@ -1,4 +1,3 @@
-local suc,err = pcall(function()
 -- Player RNG + Made by Naiko Exploits --
 
 if game:GetService("CoreGui"):FindFirstChild("Plus") then
@@ -505,5 +504,3 @@ while task.wait(2.5) do
 end
 	end)
 end
-end)
-print(suc,err)

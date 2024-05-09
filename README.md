@@ -17,7 +17,7 @@
 ## Script information
 `Version 0.96`
 ## Shortened Script
-```
+```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NaikoScript/Player-RNG-Plus/main/Script"))()
 ```
 ## Game information

@@ -213,6 +213,7 @@ end
     		else
      
      		end
+		end
 		ChangeData("Started.txt","true")
 		ChangeData("ServerIdTarget.JobId",tostring(Server.id),true)
 		task.wait()

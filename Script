@@ -1,5 +1,5 @@
 -- Player RNG + Made by Naiko Exploits --
---
+
 if game:GetService("CoreGui"):FindFirstChild("Plus") then
 return warn("Script already running")
 else
@@ -103,7 +103,7 @@ function CheckLuckCount(Count)
 local Amount = Count:split("/")
 local Minimum = Amount[1]
 local Maximum = Amount[2]
-return Minimum,Maximum
+return {Minimum,Maximum}
 end
 
 function SetHitbox() 
@@ -511,4 +511,3 @@ while task.wait(2.5) do
 	end
 end
 	end)
-end

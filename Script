@@ -497,6 +497,7 @@ if CurrentlyAutofarming == true then
 	if CurrentlyAutofarming == true then
 game:GetService("ReplicatedStorage").OpenPack:InvokeServer({})
 	end
+	end
 end)
 
 task.spawn(function()

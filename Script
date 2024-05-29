@@ -340,7 +340,7 @@ Tween:Create(Camera,InfoTween,{FieldOfView = 70}):Play()
 Main.Visible = false
 CurrentlyAutofarming = true
 task.spawn(function()
-while task.wait(2.5) do
+while task.wait(5) do
 	local Numbers = CheckLuckCount(LuckCount.Text)
 	local Number1 = Numbers[1]
 	local Number2 = Numbers[2]
@@ -496,7 +496,7 @@ end)
 
 if CurrentlyAutofarming == true then
 task.spawn(function()
-while task.wait(2.5) do
+while task.wait(5) do
 	local Numbers = CheckLuckCount(LuckCount.Text)
 	local Number1 = Numbers[1]
 	local Number2 = Numbers[2]

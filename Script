@@ -85,7 +85,6 @@ makefolder("NaikoScript/PlayerRngPlus")
 DefaultData("LuckyArea.txt","Path")
 DefaultData("AutoExecute.txt","true")
 DefaultData("AutoServerHop.txt","true")
-DefaultData("Started.txt","false")
 DefaultData("ServerIdTarget.JobId","None")
 Type = 1
 elseif isfolder("NaikoScript") and not isfolder("NaikoScript/PlayerRngPlus") then
@@ -213,7 +212,6 @@ end
     		else
      		end
 		end
-		ChangeData("Started.txt","true")
 		ChangeData("ServerIdTarget.JobId",tostring(Server.id),true)
 		task.wait()
         game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, Server.id);    
@@ -362,7 +360,6 @@ end
 	else 
 	CurrentlyAutofarming = false
 	ChangeData("LuckyArea.txt","Path",true)
-	ChangeData("Started.txt","false")
 	ChangeData("ServerIdTarget.JobId","None",true)
 end
 end)
@@ -518,7 +515,6 @@ if ReturnData("LuckyArea.txt",true) == "Path" then
 	else 
 	CurrentlyAutofarming = false
 	ChangeData("LuckyArea.txt","Path",true)
-	ChangeData("Started.txt","false")
 	ChangeData("ServerIdTarget.JobId","None",true)
 end
 end

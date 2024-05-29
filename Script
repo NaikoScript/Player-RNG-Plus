@@ -36,7 +36,7 @@ local CurrentlyAutofarming = false
 local LuckPlace = game:GetService("Workspace").Luck
 local LuckCount = game:GetService("Workspace").Luck.BillboardGui.Count
 local Tween = game:GetService("TweenService")
-local Version = 0.98
+local Version = 1
 
 -- Data --
 
@@ -492,6 +492,13 @@ end
 end)
 
 if CurrentlyAutofarming == true then
+	task.spawn(function()
+	while task.wait(0.05) do
+	if CurrentlyAutofarming == true then
+game:GetService("ReplicatedStorage").OpenPack:InvokeServer({})
+	end
+end)
+
 task.spawn(function()
 while task.wait(5) do
 	local Numbers = CheckLuckCount(LuckCount.Text)

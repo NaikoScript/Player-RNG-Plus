@@ -487,18 +487,6 @@ end
 end)
 
 if CurrentlyAutofarming == true then
-if ReturnData("LuckyArea.txt",true) == "Path" then
-	GoToLuck()
-	elseif ReturnData("LuckyArea.txt",true) == "Teleport" then
-	TeleportLuck()
-	elseif ReturnData("LuckyArea.txt",true) == "Hitbox" then
-	SetHitbox()
-	else 
-	CurrentlyAutofarming = false
-	ChangeData("LuckyArea.txt","Path",true)
-	ChangeData("Started.txt","false")
-	ChangeData("ServerIdTarget.JobId","None",true)
-end
 task.spawn(function()
 while task.wait(2.5) do
 	local Numbers = CheckLuckCount(LuckCount.Text)
@@ -513,4 +501,16 @@ while task.wait(2.5) do
 	end
 end
 	end)
+if ReturnData("LuckyArea.txt",true) == "Path" then
+	GoToLuck()
+	elseif ReturnData("LuckyArea.txt",true) == "Teleport" then
+	TeleportLuck()
+	elseif ReturnData("LuckyArea.txt",true) == "Hitbox" then
+	SetHitbox()
+	else 
+	CurrentlyAutofarming = false
+	ChangeData("LuckyArea.txt","Path",true)
+	ChangeData("Started.txt","false")
+	ChangeData("ServerIdTarget.JobId","None",true)
+end
 end

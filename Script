@@ -331,6 +331,19 @@ local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.
 Tween:Create(Camera,InfoTween,{FieldOfView = 70}):Play()
 Main.Visible = false
 CurrentlyAutofarming = true
+task.spawn(function()
+while task.wait(2.5) do
+	local Numbers = CheckLuckCount(LuckCount.Text)
+	local Number1 = Numbers[1]
+	local Number2 = Numbers[2]
+	print(Numbers)
+	if tonumber(Number2) - tonumber(Number1) < 1 then
+
+		else
+			ServerHop()
+	end
+end
+	end)
 	if ReturnData("LuckyArea.txt",true) == "Path" then
 	GoToLuck()
 	elseif ReturnData("LuckyArea.txt",true) == "Teleport" then
@@ -343,19 +356,6 @@ CurrentlyAutofarming = true
 	ChangeData("Started.txt","false")
 	ChangeData("ServerIdTarget.JobId","None",true)
 end
-task.spawn(function()
-while task.wait(2.5) do
-	local Numbers = CheckLuckCount(LuckCount.Text)
-	local Number1 = Numbers[1]
-	local Number2 = Numbers[2]
-	print(Numbers)
-	if tonumber(Number2) - tonumber(Number1) == 1 then
-
-		else
-			ServerHop()
-	end
-end
-	end)
 end)
 
 Button.MouseEnter:Connect(function()

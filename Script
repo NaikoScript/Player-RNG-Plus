@@ -319,6 +319,8 @@ local Icon = Button.Icon
 Button.Parent = Buttons
 Button.Name = "Plus"
 Icon.Image = "rbxassetid://12072054746"
+Button.UIScale.Scale = 0
+Tween:Create(Button.UIScale,TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{Scale = 1}):Play()
 
 -- Button Events --
 

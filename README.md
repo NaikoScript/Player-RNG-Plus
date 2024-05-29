@@ -8,8 +8,8 @@
 - [x] Working Functions
 - [x] Working Data
 - [x] Working Animated UI
-- [ ] Working Autofarm
-- [ ] Fully tested working pathfinding
+- [x] Working Autofarm
+- [x] Fully tested working pathfinding
 - [x] Fully working UI
 - [ ] AutoRoll Function
 ## Script thumbnail

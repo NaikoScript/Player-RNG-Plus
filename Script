@@ -103,7 +103,7 @@ function CheckLuckCount(Count)
 local Amount = Count:split("/")
 local Minimum = Amount[1]
 local Maximum = Amount[2]
-return Minimum,Maximum
+return {Minimum,Maximum}
 end
 
 function SetHitbox() 
@@ -500,11 +500,14 @@ if ReturnData("LuckyArea.txt",true) == "Path" then
 end
 task.spawn(function()
 while task.wait(2.5) do
-	if tonumber(CheckLuckCount(LuckCount.Text)[2]) - tonumber(CheckLuckCount(LuckCount.Text)[1]) == 1 then
+	local Numbers = CheckLuckCount(LuckCount.Text)
+	local Number1 = Numbers[1]
+	local Number2 = Numbers[2]
+	print(Numbers)
+	if tonumber(Number2) - tonumber(Number1) < 1 then
 
 		else
 			ServerHop()
 	end
 end
 	end)
-end

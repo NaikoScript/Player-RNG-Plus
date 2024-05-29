@@ -287,8 +287,9 @@ local PaddingStart = Instance.new("UIPadding")
 StartButton.Parent = StartFrame
 StartButton:FindFirstChildOfClass("UIStroke"):Destroy()
 StartButton.Size = UDim2.new(0.35,0,0.125,0)
-StartButton.BackgroundColor3 = Color3.new(17, 186, 124)
+StartButton.BackgroundColor3 = Color3.fromRGB(17, 186, 124)
 StartButton.UICorner.CornerRadius = UDim.new(0,15)
+StartButton.Text = "Start"
 PaddingStart.Parent = StartButton
 PaddingStart.PaddingLeft = UDim.new(0,2)
 PaddingStart.PaddingTop = UDim.new(0,2)

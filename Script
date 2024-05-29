@@ -336,7 +336,7 @@ while task.wait(2.5) do
 	local Numbers = CheckLuckCount(LuckCount.Text)
 	local Number1 = Numbers[1]
 	local Number2 = Numbers[2]
-	print(Numbers)
+	print(Numbers,Numbers[1],Numbers[2])
 	local result = tonumber(Number2) - tonumber(Number1)
 	if result < 1 then
 

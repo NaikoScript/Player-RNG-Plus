@@ -395,13 +395,13 @@ PlayerUI.Find.Visible = false
 PlayerUI.Inventory.Visible = false
 if Open == true then
 Open = false
-local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local InfoTween = TweenInfo.new(0.5,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
 Tween:Create(Camera,InfoTween,{FieldOfView = 70}):Play()
 Main.Visible = false
 elseif Open == false then
 Open = true
 Main.Visible = true
-local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
+local InfoTween = TweenInfo.new(0.5,Enum.EasingStyle.Sine,Enum.EasingDirection.Out)
 local InfoTween2 = TweenInfo.new(0.5,Enum.EasingStyle.Back,Enum.EasingDirection.Out)
 Main.Position = UDim2.new(0.5,0,0.6,0)
 Main.GroupTransparency = 1

@@ -38,7 +38,7 @@ local LuckCount = game:GetService("Workspace").Luck.BillboardGui.Count
 local Tween = game:GetService("TweenService")
 local Version = 1
 
--- Data --
+-- Data -----------------------------------------------------------
 
 function DefaultData(Path,Option)
 local suc,err = pcall(function()
@@ -398,7 +398,7 @@ Open = false
 local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
 Tween:Create(Camera,InfoTween,{FieldOfView = 70}):Play()
 Main.Visible = false
-elseif Open == false then
+elseif Open == false then 
 Open = true
 Main.Visible = true
 local InfoTween = TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)

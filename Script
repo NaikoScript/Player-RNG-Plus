@@ -31,7 +31,7 @@ local Camera = workspace.CurrentCamera
 local Humanoid = Char:WaitForChild("Humanoid",15)
 local PlayerUI = LocalPlayer.PlayerGui.ScreenGui
 local Buttons = PlayerUI.Buttons
-local Type = 0
+local UserType = 0
 local CurrentlyAutofarming = false
 local LuckPlace = game:GetService("Workspace").Luck
 local LuckCount = game:GetService("Workspace").Luck.BillboardGui.Count
@@ -86,15 +86,19 @@ DefaultData("LuckyArea.txt","Path")
 DefaultData("AutoExecute.txt","true")
 DefaultData("AutoServerHop.txt","true")
 DefaultData("ServerIdTarget.JobId","None")
-Type = 1
+UserType = 1
 elseif isfolder("NaikoScript") and not isfolder("NaikoScript/PlayerRngPlus") then
-Type = 2
+UserType = 2
 print("This user has not executed this before but has used other naiko exploit script projects")
 makefolder("NaikoScript/PlayerRngPlus")
 elseif isfolder("NaikoScript") and isfolder("NaikoScript/PlayerRngPlus") then
-Type = 3
+UserType = 3
 print("This script has been executed before")
 end
+local ValueUser = Instance.new("NumberValue")
+ValueUser.Parent = game:GetService("CoreGui")
+ValueUser.Name = "UserType"
+ValueUser.Value = UserType
 
 -- Script functions --
 

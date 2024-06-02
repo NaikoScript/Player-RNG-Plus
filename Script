@@ -36,31 +36,26 @@ local CurrentlyAutofarming = false
 local LuckPlace = game:GetService("Workspace").Luck
 local LuckCount = game:GetService("Workspace").Luck.BillboardGui.Count
 local Tween = game:GetService("TweenService")
-local Version = 1
+local Version = 1.1
 
 -- Data --
 
 function DefaultData(Path,Option)
-local suc,err = pcall(function()
-	if readfile("NaikoScript/PlayerRngPlus/" .. Path) then
-	end
-end)
-if suc == true then
+if isfile("NaikoScript/PlayerRngPlus/" .. Path) ~= false then
 return warn("Option already exists")
 else
 writefile("NaikoScript/PlayerRngPlus/" .. Path,Option)
 return print("Set default data")
 end
-
 end
 
 function ChangeData(Path,Option,WithFolder)
 if WithFolder == false then
-if readfile(Path) ~= nil then
+if isfile(Path) ~= false then
 return writefile(Path,Option)
 end
 else 
-if readfile("NaikoScript/PlayerRngPlus/" .. Path) ~= nil then
+if isfile("NaikoScript/PlayerRngPlus/" .. Path) ~= false then
 return writefile("NaikoScript/PlayerRngPlus/" .. Path,Option)
 end
 end
@@ -68,11 +63,11 @@ end
 
 function ReturnData(Path,WithFolder)
 if WithFolder == false then
-if readfile(Path) ~= nil then
+if isfile(Path) ~= false then
 return readfile(Path)
 end
 else
-if readfile("NaikoScript/PlayerRngPlus/" .. Path) ~= nil then
+if isfile("NaikoScript/PlayerRngPlus/" .. Path) ~= false then
 return readfile("NaikoScript/PlayerRngPlus/" .. Path)
 end
 end

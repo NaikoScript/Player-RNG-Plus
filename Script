@@ -44,7 +44,7 @@ local CurrentlyAutofarming = false
 local LuckPlace = game:GetService("Workspace").Luck
 local LuckCount = game:GetService("Workspace").Luck.BillboardGui.Count
 local Tween = game:GetService("TweenService")
-local Version = 1.1
+local Version = 1.15
 
 -- Data --
 

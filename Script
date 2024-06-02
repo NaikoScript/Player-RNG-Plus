@@ -539,4 +539,3 @@ if ReturnData("LuckyArea.txt",true) == "Path" then
 	ChangeData("LuckyArea.txt","Path",true)
 	ChangeData("ServerIdTarget.JobId","None",true)
 end
-end

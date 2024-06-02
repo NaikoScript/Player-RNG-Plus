@@ -10,6 +10,10 @@ else
 return warn("Incorrect game")
 end
 
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+	game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+
 if type(readfile) == nil or type(writefile) == nil then
 warn("YOUR EXECUTOR POSSIBLY DOES NOT SUPPORT LOCAL DATA SAVING MEANING THIS SCRIPT WILL NOT WORK PLEASE GET A EXECUTOR THAT SUPPORT THESE FUNCTIONS : readfile,writefile")
 print("If your executor does support local data saving and this pops up please contact the creator of the script")

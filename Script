@@ -1,9 +1,13 @@
 -- Player RNG + Made by Naiko Exploits --
 
+repeat task.wait() until game:IsLoaded() and task.wait(1.5)
+
 if game:GetService("CoreGui"):FindFirstChild("Plus") then
 return warn("Script already running")
-else
+elseif tostring(game.GameId) == "5819852418" then
 Instance.new("BoolValue",game:GetService("CoreGui")).Name = "Plus"
+else
+return warn("Incorrect game")
 end
 
 if type(readfile) == nil or type(writefile) == nil then

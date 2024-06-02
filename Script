@@ -442,9 +442,21 @@ else
 ChangeData("ServerIdTarget.JobId","None",true)
 end
 
+
+
 local Button1 = CreateButton()
 Button1.Parent = Frame
+local ReturnedAreaLuckData = ReturnData("LuckArea.txt")
+if ReturnedAreaLuckData == "Path" then
 Button1.Text = "Pathfinding"
+elseif ReturnedAreaLuckData == "Teleport" then
+Button1.Text = "Teleport"
+elseif ReturnedAreaLuckData == "Hitbox" then
+Button1.Text = "Huge hitbox"
+else
+Button1.Text = "Pathfinding"
+end
+
 
 Button1.MouseButton1Click:Connect(function()
 if Button1.Text == "Pathfinding" then

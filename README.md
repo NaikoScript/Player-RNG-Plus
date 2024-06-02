@@ -1,6 +1,6 @@
 # Player RNG Plus
 > [!IMPORTANT]
-> **Join the [discord server](https://discord.gg/vAWJMYJYcR) to get updates with the scripts progress and be informed when its fully released.**
+> **Join my [discord server](https://discord.gg/vAWJMYJYcR) if you find any bugs or have issues with the script**
 ## Script thumbnail
 ![PlayerRng+](https://github.com/NaikoScript/Player-RNG-Plus/assets/107273752/9a29f334-47b7-4e11-bdf3-da7209eb2fd5)
 ## Script information

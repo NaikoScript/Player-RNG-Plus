@@ -446,7 +446,7 @@ end
 
 local Button1 = CreateButton()
 Button1.Parent = Frame
-local ReturnedAreaLuckData = ReturnData("LuckArea.txt")
+local ReturnedAreaLuckData = ReturnData("LuckyArea.txt")
 if ReturnedAreaLuckData == "Path" then
 Button1.Text = "Pathfinding"
 elseif ReturnedAreaLuckData == "Teleport" then
@@ -479,7 +479,14 @@ end)
 
 local Button2 = CreateButton()
 Button2.Parent = Frame
+local ReturnedAutoExecuteData = ReturnData("AutoExecute.txt")
+if ReturnedAutoExecuteData == "true" then
 Button2.Text = "AutoExecute (On)"
+elseif ReturnedAutoExecuteData == "false" then
+Button2.Text = "AutoExecute (Off)"
+else
+Button2.Text = "AutoExecute (On)"
+end
 
 Button2.MouseButton1Click:Connect(function()
 if Button2.Text == "AutoExecute (On)" then
@@ -499,7 +506,14 @@ end)
 
 local Button3 = CreateButton()
 Button3.Parent = Frame
+local ReturnedAutoServerHopData = ReturnData("AutoServerHop.txt")
+if ReturnedAutoServerHopData == "true" then
 Button3.Text = "AutoServerHop (On)"
+elseif ReturnedAutoServerHopData == "false" then
+Button3.Text = "AutoServerHop (Off)"
+else
+Button3.Text = "AutoServerHop (On)"
+end
 
 Button3.MouseButton1Click:Connect(function()
 if Button3.Text == "AutoServerHop (On)" then

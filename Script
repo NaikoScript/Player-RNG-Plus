@@ -505,14 +505,13 @@ ChangeData("AutoServerHop.txt","true",true)
 end
 end)
 
-if CurrentlyAutofarming == true then
+
 	task.spawn(function()
 	while task.wait(0.1) do
 	if CurrentlyAutofarming == true then
 game:GetService("ReplicatedStorage").OpenPack:InvokeServer({})
 	end
 	end
-end)
 
 task.spawn(function()
 while task.wait(5) do

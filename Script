@@ -94,6 +94,10 @@ elseif isfolder("NaikoScript") and not isfolder("NaikoScript/PlayerRngPlus") the
 UserType = 2
 print("This user has not executed this before but has used other naiko exploit script projects")
 makefolder("NaikoScript/PlayerRngPlus")
+DefaultData("LuckyArea.txt","Path")
+DefaultData("AutoExecute.txt","true")
+DefaultData("AutoServerHop.txt","true")
+DefaultData("ServerIdTarget.JobId","None")
 elseif isfolder("NaikoScript") and isfolder("NaikoScript/PlayerRngPlus") then
 UserType = 3
 print("This script has been executed before")

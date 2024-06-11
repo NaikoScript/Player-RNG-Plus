@@ -44,7 +44,7 @@ local CurrentlyAutofarming = false
 local LuckPlace = game:GetService("Workspace").Luck
 local LuckCount = game:GetService("Workspace").Luck.BillboardGui.Count
 local Tween = game:GetService("TweenService")
-local Version = 1.15
+local Version = 1.2
 
 -- Data --
 
@@ -118,7 +118,7 @@ end
 
 function SetHitbox() 
 if LuckPlace ~= nil then
-LuckPlace.Size = Vector3.new(275,275,275)
+LuckPlace.Size = Vector3.new(400,275,400)
 LuckPlace.Position = Vector3.new(0, -22, 0)
 else
 	error("Failed to get the luck part")
@@ -443,6 +443,7 @@ end)
 if ReturnData("ServerIdTarget.JobId",true) == tostring(game.JobId) then
 CurrentlyAutofarming = true
 else
+CurrentlyAutofarming = false
 ChangeData("ServerIdTarget.JobId","None",true)
 end
 
@@ -558,6 +559,7 @@ while task.wait(5) do
 	end
 end
 	end)
+	if CurrentlyAutofarming == true then
 if ReturnData("LuckyArea.txt",true) == "Path" then
 	GoToLuck()
 	elseif ReturnData("LuckyArea.txt",true) == "Teleport" then
@@ -569,3 +571,4 @@ if ReturnData("LuckyArea.txt",true) == "Path" then
 	ChangeData("LuckyArea.txt","Path",true)
 	ChangeData("ServerIdTarget.JobId","None",true)
 end
+	end

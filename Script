@@ -87,7 +87,7 @@ makefolder("NaikoScript")
 makefolder("NaikoScript/PlayerRngPlus")
 DefaultData("LuckyArea.txt","Path")
 DefaultData("AutoExecute.txt","true")
-DefaultData("AutoServerHop.txt","true")
+DefaultData("AutoServerHop.txt","false")
 DefaultData("ServerIdTarget.JobId","None")
 UserType = 1
 elseif isfolder("NaikoScript") and not isfolder("NaikoScript/PlayerRngPlus") then
@@ -96,10 +96,14 @@ print("This user has not executed this before but has used other naiko exploit s
 makefolder("NaikoScript/PlayerRngPlus")
 DefaultData("LuckyArea.txt","Path")
 DefaultData("AutoExecute.txt","true")
-DefaultData("AutoServerHop.txt","true")
+DefaultData("AutoServerHop.txt","false")
 DefaultData("ServerIdTarget.JobId","None")
 elseif isfolder("NaikoScript") and isfolder("NaikoScript/PlayerRngPlus") then
 UserType = 3
+DefaultData("LuckyArea.txt","Path")
+DefaultData("AutoExecute.txt","true")
+DefaultData("AutoServerHop.txt","false")
+DefaultData("ServerIdTarget.JobId","None")
 print("This script has been executed before")
 end
 local ValueUser = Instance.new("NumberValue")

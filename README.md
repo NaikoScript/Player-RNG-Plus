@@ -10,7 +10,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NaikoScript/Player-RNG-Plus/main/Script"))()
 ```
 ## Game information
-`Last seen update : 5D/5M/2024`
+`Last seen update : 23D/10M/2024`
 ```
 https://www.roblox.com/games/16953799253
 ```
